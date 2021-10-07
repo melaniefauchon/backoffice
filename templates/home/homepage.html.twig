@@ -24,11 +24,11 @@
                             <div class="card-body">
                             <h5 class="card-title">{{book.title}}</h5>
                             <span class="text-muted mb-2">{{book.author.firstname ~ ' ' ~ book.author.lastname }}</span>
-                                <p class="card-text mt-2">{{book.summary}}</p>
+                                <p class="card-text mt-2">{{book.summary|u.truncate(60,'...',false)}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-sm btn-outline-secondary">Voir</a>
-                                        <a href="#" class="btn btn-sm btn-outline-secondary">Editer</a>
+                                        <a href="{{path('backoffice_book_read' , {id:book.id})}}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                        <a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
                                     </div>
                                 </div>
                             </div>

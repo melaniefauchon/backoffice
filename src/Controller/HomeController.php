@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="homepage")
      */
-    public function index(BookRepository $bookRepository): Response
+    public function home(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findAll();
+        $books = $bookRepository->findByLastUpdated();
 
         return $this->render('home/homepage.html.twig', [
             'books'=>$books

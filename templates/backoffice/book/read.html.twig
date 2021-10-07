@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container my-4">
+		<h1>Détail de '{{book.title}}'</h1>
+	</div>
+
+	<div class="container">
+		<table class="table table-hover mt-4">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Titre</th>
+					<th scope="col">Auteur</th>
+					<th scope="col">Nb pages</th>
+					<th scope="col">Genre</th>
+					<th scope="col">Date de publication</th>
+					<th scope="col">Résumé</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">{{book.id}}</th>
+					<td>{{book.title}}</td>
+					<td>{{book.author.firstname ~ ' ' ~ book.author.lastname}}</td>
+					<td>{{book.nbPages}}</td>
+					<td>{{book.genre.name}}</td>
+					<td>{{book.publishedAt|date("d/m/Y")}}</td>
+					<td>{{book.summary}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="text-center">
+		<a href="{{path('backoffice_book_browse')}}" class="btn btn-md btn-primary"><i class="fas fa-undo"></i> Retour</a>
+		<a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-md btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+        						<div class="btn-group" role="group">
+							<button id="btnGroupDrop1" type="button" class="btn btn-md btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fa fa-trash-o" aria-hidden="true"></i> supprimer
+
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+								<li>
+									<a class="dropdown-item" href="{{path('backoffice_book_delete', {id: book.id})}}">Oui, je veux supprimer !</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{path('backoffice_book_browse')}}">Oups ...</a>
+								</li>
+							</ul>
+						</div>
+
+
+	</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>
+			{% if page == 'add' %}
+				Nouveau livre
+			{% else %}
+				Modifier '{{ book.title }}'
+			{% endif %}
+		</h1>
+
+		{{ form_start(book_form) }}
+		{{ form_row(book_form.title)}}
+		{{ form_row(book_form.author)}}
+		{{ form_row(book_form.nb_pages)}}
+		{{ form_row(book_form.genre)}}
+		{{ form_row(book_form.summary)}}
+		{{ form_row(book_form.publishedAt)}}
+
+		<button class="btn btn-primary mt-4 mb-3">
+			{% if 'backoffice_book_add' == app.request.get('_route') %}
+				Créer
+			{% else %}
+				Modifier
+			{% endif %}
+		</button>
+
+		{{ form_end(book_form)}}
+    <div class="text-start">
+    <a href="{{path('backoffice_book_browse')}}" class="btn btn-danger">Annuler</a></div>
+	</div>
+
+{% endblock %}
