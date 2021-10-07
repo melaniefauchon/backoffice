@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container my-4">
+		<h1>Details of a user
+		</h1>
+		<table class="table table-hover mt-4">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Pseudo</th>
+					<th scope="col">Email</th>
+					<th scope="col">Roles</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">{{user.id}}</th>
+					<td>{{user.pseudo}}</td>
+					<td>{{user.email}}</td>
+					<td>
+						{% for role in user.roles %}
+							<ul>
+								<li>{{role}}</li>
+							</ul>
+						{% endfor %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center">
+			<a href="{{path('backoffice_user_browse')}}" class="btn btn-md btn-primary">
+				<i class="fas fa-undo"></i>
+				Retour</a>
+			<a href="{{path('backoffice_user_edit', {id: user.id}) }}" class="btn btn-md btn-warning">
+				<i class="fa fa-pencil-square-o"></i>
+				Modifier</a>
+			<div class="btn-group" role="group">
+				<button id="btnGroupDrop1" type="button" class="btn btn-md btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+					supprimer
+
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					<li>
+						<a class="dropdown-item" href="{{path('backoffice_user_delete', {id: user.id})}}">Oui, je veux supprimer !</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{path('backoffice_user_browse')}}">Oups ...</a>
+					</li>
+				</ul>
+			</div>
+
+
+		</div>
+	</div>
+
+{% endblock %}

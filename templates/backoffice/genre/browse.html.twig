@@ -31,20 +31,22 @@
 								<a href="{{path('backoffice_genre_edit', {id: genre.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="update">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								</a>
-								<div class="btn-group" role="group">
-									<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-										<i class="fa fa-trash-o" aria-hidden="true"></i>
+								{% if (is_granted('ROLE_ADMIN')) %}
+									<div class="btn-group" role="group">
+										<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="fa fa-trash-o" aria-hidden="true"></i>
 
-									</button>
-									<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-										<li>
-											<a class="dropdown-item" href="{{path('backoffice_genre_delete', {id: genre.id})}}">Oui, je veux supprimer !</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="{{path('backoffice_genre_browse')}}">Oups ...</a>
-										</li>
-									</ul>
-								</div>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+											<li>
+												<a class="dropdown-item" href="{{path('backoffice_genre_delete', {id: genre.id})}}">Oui, je veux supprimer !</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{path('backoffice_genre_browse')}}">Oups ...</a>
+											</li>
+										</ul>
+									</div>
+								{% endif %}
 							</td>
 						</tr>
 					{% endfor %}

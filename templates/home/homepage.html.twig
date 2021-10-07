@@ -1,44 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <main>
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Gestion de "Ma petite Librairie"</h1>
-                    <p class="lead text-muted">Veuillez vous connecter pour gérer la librairie</p>
-                    <p>
-                        <a href="#" class="btn btn-warning my-2">Se connecter</a>
-                    </p>
-                </div>
-            </div>
-        </section>
-        <div class="py-5 bg-light">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {% for book in books %}
-                        
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="" alt="" class="bd-placeholder-img card-img-top">
-                            <div class="card-body">
-                            <h5 class="card-title">{{book.title}}</h5>
-                            <span class="text-muted mb-2">{{book.author.firstname ~ ' ' ~ book.author.lastname }}</span>
-                                <p class="card-text mt-2">{{book.summary|u.truncate(60,'...',false)}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href="{{path('backoffice_book_read' , {id:book.id})}}" class="btn btn-sm btn-outline-secondary">Voir</a>
-                                        <a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+	<main>
+		<section class="py-5 text-center container">
+			<div class="row py-lg-5">
+				<div class="col-lg-6 col-md-8 mx-auto">
+					<h1 class="fw-light">Gestion de "Ma petite Librairie"</h1>
+					<p class="lead text-muted">Veuillez vous connecter pour gérer la librairie</p>
+					{% if app.user is null %}
+						<p>
+							<a href="{{path('app_login')}}" class="btn btn-warning my-2">Se connecter</a>
+						</p>
+					{% endif %}
+				</div>
+			</div>
+		</section>
+		<div class="py-5 bg-light">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+					{% for book in books %}
 
-                </div>
-            </div>
-        </div>
-    </main>
+						<div class="col">
+							<div class="card shadow-sm">
+								<img src="" alt="" class="bd-placeholder-img card-img-top">
+								<div class="card-body">
+									<h5 class="card-title">{{book.title}}</h5>
+									<span class="text-muted mb-2">{{book.author.firstname ~ ' ' ~ book.author.lastname }}</span>
+									<p class="card-text mt-2">{{book.summary|u.truncate(60,'...',false)}}</p>
+									<div class="d-flex justify-content-between align-items-center">
+										{% if app.user %}
+										<div class="btn-group">
+											<a href="{{path('backoffice_book_read' , {id:book.id})}}" class="btn btn-sm btn-outline-secondary">Voir</a>
+											<a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
+										</div>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</main>
 
 {% endblock %}

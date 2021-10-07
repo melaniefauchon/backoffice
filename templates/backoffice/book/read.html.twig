@@ -33,23 +33,29 @@
 	</div>
 
 	<div class="text-center">
-		<a href="{{path('backoffice_book_browse')}}" class="btn btn-md btn-primary"><i class="fas fa-undo"></i> Retour</a>
-		<a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-md btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
-        						<div class="btn-group" role="group">
-							<button id="btnGroupDrop1" type="button" class="btn btn-md btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa fa-trash-o" aria-hidden="true"></i> supprimer
+		<a href="{{path('backoffice_book_browse')}}" class="btn btn-md btn-primary">
+			<i class="fas fa-undo"></i>
+			Retour</a>
+		<a href="{{path('backoffice_book_edit', {id: book.id}) }}" class="btn btn-md btn-warning">
+			<i class="fa fa-pencil-square-o"></i>
+			Modifier</a>
+		{% if (is_granted('ROLE_ADMIN')) %}
+			<div class="btn-group" role="group">
+				<button id="btnGroupDrop1" type="button" class="btn btn-md btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+					supprimer
 
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-								<li>
-									<a class="dropdown-item" href="{{path('backoffice_book_delete', {id: book.id})}}">Oui, je veux supprimer !</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="{{path('backoffice_book_browse')}}">Oups ...</a>
-								</li>
-							</ul>
-						</div>
-
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					<li>
+						<a class="dropdown-item" href="{{path('backoffice_book_delete', {id: book.id})}}">Oui, je veux supprimer !</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{path('backoffice_book_browse')}}">Oups ...</a>
+					</li>
+				</ul>
+			</div>
+		{% endif %}
 
 	</div>
 {% endblock %}

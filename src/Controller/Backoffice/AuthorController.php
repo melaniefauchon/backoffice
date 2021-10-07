@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/backoffice/author", name="backoffice_author_")
@@ -18,6 +19,7 @@ class AuthorController extends AbstractController
 {
     /**
      * @Route("/", name="browse")
+     * @IsGranted("ROLE_USER")
      */
     public function browse(AuthorRepository $authorRepository): Response
     {
@@ -29,6 +31,7 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/read/{id}", name="read", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function read(Author $author): Response
     {
@@ -39,6 +42,7 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Author $author): Response
     {
@@ -65,6 +69,7 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/add", name="add", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function add(Request $request): Response
     {
@@ -93,6 +98,7 @@ class AuthorController extends AbstractController
 
     /**
      * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Author $author)
     {

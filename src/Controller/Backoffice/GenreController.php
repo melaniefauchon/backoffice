@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/backoffice/genre", name="backoffice_genre_")
@@ -18,6 +19,7 @@ class GenreController extends AbstractController
 {
     /**
      * @Route("/", name="browse")
+     * @IsGranted("ROLE_USER")
      */
     public function browse(GenreRepository $genreRepository): Response
     {
@@ -30,6 +32,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Genre $genre): Response
     {
@@ -56,6 +59,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/add", name="add", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function add(Request $request): Response
     {
@@ -84,6 +88,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Genre $genre)
     {

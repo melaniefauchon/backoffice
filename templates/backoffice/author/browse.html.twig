@@ -36,6 +36,7 @@
 								<a href="{{path('backoffice_author_edit', {id: author.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="update">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								</a>
+								{% if (is_granted('ROLE_ADMIN')) %}
 								<div class="btn-group" role="group">
 									<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -50,6 +51,7 @@
 										</li>
 									</ul>
 								</div>
+								{% endif %}
 							</td>
 						</tr>
 					{% endfor %}

@@ -18,58 +18,69 @@
 
 
 		<title>
-			{% block title %}BackOffice "Ma petite Librairie"{% endblock %}
+			{% block title %}BackOffice "Ma petite Librairie"
+			{% endblock %}
 		</title>
 
 	</head>
 	<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand text-warning" href="{{path('homepage')}}"><i class="fas fa-book"></i> Ma petite libraire</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{path('homepage')}}">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('backoffice_book_browse')}}">Livres</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('backoffice_author_browse')}}">Auteurs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('backoffice_genre_browse')}}">Genre</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">User</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="btn btn-warning" href="#">Se connecter</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </header>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container-fluid">
+					<a class="navbar-brand text-warning" href="{{path('homepage')}}">
+						<i class="fas fa-book"></i>
+						Ma petite libraire</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav me-auto mb-2 mb-md-0">
+							<li class="nav-item">
+								<a {% if app.request.get('_route') starts with 'homepage' %} class="nav-link active" aria-current="page" {% else %} class="nav-link" href="{{path('homepage')}}" {% endif %}>Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a {% if app.request.get('_route') starts with 'backoffice_book_browse' %} class="nav-link active" aria-current="page" {% else %} class="nav-link" href="{{path('backoffice_book_browse')}}" {% endif %}>Livres</a>
+							</li>
+							<li class="nav-item">
+								<a {% if app.request.get('_route') starts with 'backoffice_author_browse' %} class="nav-link active" aria-current="page" {% else %} class="nav-link" href="{{path('backoffice_author_browse')}}" {% endif %}>Auteurs</a>
+							</li>
+							<li class="nav-item">
+								<a {% if app.request.get('_route') starts with 'backoffice_genre_browse' %} class="nav-link active" aria-current="page" {% else %} class="nav-link" href="{{path('backoffice_genre_browse')}}" {% endif %}>Genre</a>
+							</li>
+							{% if (is_granted('ROLE_ADMIN')) %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{path('backoffice_user_browse') }}">Utilisateurs</a>
+								</li>
+							{% endif %}
+						</ul>
+						{% if app.user %}
+							<span class="text-white mx-4">Bienvenue
+								{{app.user.pseudo}}</span>
+							<ul class="navbar-nav me-4 mb-md-0">
+								<li class="nav-item">
+									<a class="btn btn-warning" href="{{path('app_logout')}}">Se déconnecter</a>
+								</li>
+							</ul>
+						{% else %}
+							<ul class="navbar-nav me-4 mb-md-0">
+								<li class="nav-item">
+									<a class="btn btn-warning" href="{{path('app_login')}}">Se connecter</a>
+								</li>
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+			</nav>
+		</header>
 		{% block body %}{% endblock %}
-            <footer class="text-muted text-center py-5">
-        <div class="container">
-            <p class="mb-1">2021 &copy; BackOffice "Ma petite Librairie" by Mélanie Fauchon</p>
-        </div>
-    </footer>
+		<footer class="text-muted text-center py-5">
+			<div class="container">
+				<p class="mb-1">2021 &copy; BackOffice "Ma petite Librairie" by Mélanie Fauchon</p>
+			</div>
+		</footer>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous">
-    </script>
+		<!-- Option 1: Bootstrap Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 
 	</body>
 </html>
