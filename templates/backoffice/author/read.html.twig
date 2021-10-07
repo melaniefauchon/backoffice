@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container my-4">
+		<h1>Détail de '{{author.firstname ~ ' ' ~ author.lastname}}'</h1>
+	</div>
+
+	<div class="container">
+		<table class="table table-hover mt-4">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Prénom</th>
+					<th scope="col">Nom</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">{{author.id}}</th>
+					<td>{{author.firstname}}</td>
+					<td>{{author.lastname}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="text-center">
+		<a href="{{path('backoffice_author_browse')}}" class="btn btn-md btn-primary"><i class="fas fa-undo"></i> Retour</a>
+		<a href="{{path('backoffice_author_edit', {id: author.id}) }}" class="btn btn-md btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+        						<div class="btn-group" role="group">
+							<button id="btnGroupDrop1" type="button" class="btn btn-md btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fa fa-trash-o" aria-hidden="true"></i> supprimer
+
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+								<li>
+									<a class="dropdown-item" href="{{path('backoffice_author_delete', {id: author.id})}}">Oui, je veux supprimer !</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{path('backoffice_author_browse')}}">Oups ...</a>
+								</li>
+							</ul>
+						</div>
+
+
+	</div>
+{% endblock %}

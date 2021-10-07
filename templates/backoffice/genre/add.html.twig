@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>
+			{% if page == 'add' %}
+				Nouveau genre
+			{% else %}
+				Modifier '{{ genre.name}}'
+			{% endif %}
+		</h1>
+
+		{{ form_start(genre_form) }}
+		{{ form_row(genre_form.name)}}
+
+		<button class="btn btn-primary mt-4 mb-3">
+			{% if 'backoffice_genre_add' == app.request.get('_route') %}
+				Créer
+			{% else %}
+				Modifier
+			{% endif %}
+		</button>
+
+		{{ form_end(genre_form)}}
+    <div class="text-start">
+    <a href="{{path('backoffice_genre_browse')}}" class="btn btn-danger">Annuler</a></div>
+	</div>
+
+{% endblock %}

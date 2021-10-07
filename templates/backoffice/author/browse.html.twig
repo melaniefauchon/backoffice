@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container my-4">
+		<h1>Liste des auteurs</h1>
+		<div class="text-end">
+			<a href="{{path('backoffice_author_add')}}" class="btn btn-warning">
+				<i class="fas fa-plus-circle"></i>
+				Ajouter</a>
+		</div>
+
+		{# Partie pour les flash message #}
+		{{ include('_partials/_flash_messages.html.twig') }}
+
+		<div class="container">
+			<table class="table table-hover mt-4">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for author in authors %}
+
+						<tr>
+							<th scope="row">{{author.id}}</th>
+							<td>{{author.firstname}}</td>
+							<td>{{author.lastname}}</td>
+							<td class="text-right">
+								<a href="{{path('backoffice_author_read' , {id:author.id})}}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="read">
+									<i class="far fa-eye"></i>
+								</a>
+								<a href="{{path('backoffice_author_edit', {id: author.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="update">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+								</a>
+								<div class="btn-group" role="group">
+									<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										<li>
+											<a class="dropdown-item" href="{{path('backoffice_author_delete', {id: author.id})}}">Oui, je veux supprimer !</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{path('backoffice_author_browse')}}">Oups ...</a>
+										</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

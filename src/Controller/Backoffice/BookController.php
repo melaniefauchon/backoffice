@@ -29,7 +29,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("read/{id}", name="read", requirements={"id"="\d+"})
+     * @Route("/read/{id}", name="read", requirements={"id"="\d+"})
      */
     public function read(Book $book): Response
     {
@@ -39,7 +39,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function edit(Request $request, Book $book): Response
     {

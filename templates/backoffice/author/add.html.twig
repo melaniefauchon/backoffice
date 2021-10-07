@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>
+			{% if page == 'add' %}
+				Nouvel(le) auteur(e)
+			{% else %}
+				Modifier '{{ author.firstname ~ ' ' ~ author.lastname}}'
+			{% endif %}
+		</h1>
+
+		{{ form_start(author_form) }}
+		{{ form_row(author_form.firstname)}}
+		{{ form_row(author_form.lastname)}}
+
+		<button class="btn btn-primary mt-4 mb-3">
+			{% if 'backoffice_author_add' == app.request.get('_route') %}
+				Créer
+			{% else %}
+				Modifier
+			{% endif %}
+		</button>
+
+		{{ form_end(author_form)}}
+    <div class="text-start">
+    <a href="{{path('backoffice_author_browse')}}" class="btn btn-danger">Annuler</a></div>
+	</div>
+
+{% endblock %}
